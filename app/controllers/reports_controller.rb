@@ -16,13 +16,13 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.create(params[:report])
-    respond_with(@report)
+    respond_with(@report, :include => [:camera, :sign])
   end
 
   def update
     @report = Report.find(params[:id])
     @report.update_attributes(params[:report])
-    respond_with(@report)
+    respond_with(@report, :include => [:camera, :sign])
   end
 
 end

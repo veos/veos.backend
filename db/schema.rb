@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20120417145314) do
   add_index "cameras", ["report_id"], :name => "cameras_report_id_fk"
 
   create_table "photos", :force => true do |t|
-    t.integer  "object_id"
-    t.string   "object_type"
+    t.integer  "of_object_id"
+    t.string   "of_object_type"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20120417145314) do
 
   create_table "signs", :force => true do |t|
     t.integer  "report_id",  :null => false
+    t.text     "text"
+    t.string   "visibility"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
