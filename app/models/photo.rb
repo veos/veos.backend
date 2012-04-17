@@ -5,4 +5,8 @@ class Photo < ActiveRecord::Base
   has_attached_file :image, 
     :path => ":rails_root/public/photos/:attachment/:id/:style/:filename.jpg",
     :url => "/photos/:attachment/:id/:style/:filename.jpg"
+
+  def url
+    image.url
+  end
 end
