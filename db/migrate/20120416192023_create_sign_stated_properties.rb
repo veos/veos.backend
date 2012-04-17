@@ -1,7 +1,7 @@
 class CreateSignStatedProperties < ActiveRecord::Migration
   def change
     create_table :sign_stated_properties do |t|
-      t.belongs_to :sign
+      t.belongs_to :sign, :null => false
       t.string :property, :null => false
       t.timestamps
     end

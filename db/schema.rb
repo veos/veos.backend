@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416192023) do
+ActiveRecord::Schema.define(:version => 20120417145314) do
 
   create_table "camera_spaces", :force => true do |t|
-    t.integer  "camera_id"
+    t.integer  "camera_id",  :null => false
     t.string   "space",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -23,16 +23,23 @@ ActiveRecord::Schema.define(:version => 20120416192023) do
   add_index "camera_spaces", ["camera_id"], :name => "camera_spaces_camera_id_fk"
 
   create_table "cameras", :force => true do |t|
-    t.integer  "report_id",          :null => false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "report_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "cameras", ["report_id"], :name => "cameras_report_id_fk"
+
+  create_table "photos", :force => true do |t|
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "reports", :force => true do |t|
     t.float    "loc_lat_from_gps"
@@ -48,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20120416192023) do
   end
 
   create_table "sign_stated_properties", :force => true do |t|
-    t.integer  "sign_id"
+    t.integer  "sign_id",    :null => false
     t.string   "property",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -57,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20120416192023) do
   add_index "sign_stated_properties", ["sign_id"], :name => "sign_stated_properties_sign_id_fk"
 
   create_table "sign_stated_purposes", :force => true do |t|
-    t.integer  "sign_id"
+    t.integer  "sign_id",    :null => false
     t.string   "purpose",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -66,13 +73,9 @@ ActiveRecord::Schema.define(:version => 20120416192023) do
   add_index "sign_stated_purposes", ["sign_id"], :name => "sign_stated_purposes_sign_id_fk"
 
   create_table "signs", :force => true do |t|
-    t.integer  "report_id",          :null => false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "report_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "signs", ["report_id"], :name => "signs_report_id_fk"

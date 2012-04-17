@@ -1,4 +1,6 @@
 VeosBackend::Application.routes.draw do
+  resources :photos
+
   resources :signs
 
   resources :cameras

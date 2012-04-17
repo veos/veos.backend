@@ -1,7 +1,7 @@
 class CreateCameraSpaces < ActiveRecord::Migration
   def change
     create_table :camera_spaces do |t|
-      t.belongs_to :camera
+      t.belongs_to :camera, :null => false
       t.string :space, :null => false
       t.timestamps
     end
