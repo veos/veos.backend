@@ -1,0 +1,50 @@
+// Place all the styles related to the portal controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$contentWidth: 800px;
+
+body {
+    font-family: Verdana, sans-serif;
+    background: #585858;
+    margin: 0;
+}
+
+#masthead {
+    background: #979797;
+    padding: 8px;
+    border-bottom: 2px solid white;
+    height: 160px;
+}
+
+#masthead hgroup {
+    width: $contentWidth;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#masthead hgroup * {
+    margin: 0;
+}
+
+.page-content {
+    margin-top: -60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;
+    width: $contentWidth;
+    background: #dfdfdf;
+    padding: 8px;
+    border: 2px solid white;
+}
+
+.page-content h3 {
+    background: #FFFF64;
+    margin: 0;
+    padding: 10px;
+}
+
+#reports-map {
+    width: 100%;
+    height: 400px;
+}

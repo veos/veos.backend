@@ -34,4 +34,6 @@ VeosBackend::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.mobile_url = "http://localhost:8000"
 end

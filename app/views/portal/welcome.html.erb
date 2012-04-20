@@ -1,0 +1,27 @@
+<header id="masthead">
+    <hgroup>
+        <h1>VEOS</h1>
+        <h2>Video Eyes on the Street</h2>
+    </hgroup>
+</header>
+
+<div id="welcome-page" class="page-content">
+    <h3>Welcome!</h3>
+    <p>
+        Beta vulgaris subsp cicla var flavescens scorzonera hispanica. Eruca sativa raphanus sativus longipinnatus group. Pteridium aquilinum, Athyrium esculentum adansonia spp praecitrullus fistulosus.
+    </p>
+
+    <div id="reports-map">Loading map....</div>
+</div>
+
+<script type="text/javascript">
+    function initMap(loc) {
+        if (!loc) fakeLoc = {coords: {longitude: -79.3985955, latitude: 43.6685239}};
+
+        veos.map.createMap(loc || fakeLoc, "#reports-map");
+    }
+
+    $(window).load(function () {
+        navigator.geolocation.getCurrentPosition(initMap, initMap);
+    });
+</script>
