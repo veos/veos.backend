@@ -59,7 +59,7 @@ module VeosBackend
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.mobile_url = "http://mobile.veos.surveillencerights.ca"
+    config.mobile_url = "http://mobile.veos.surveillancerights.ca"
 
     config.middleware.use Rack::Cors do
       allow do
