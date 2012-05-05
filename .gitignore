@@ -18,3 +18,5 @@
 /public/photos/*
 
 /vendor/bundle/*
+
+.DS_Store
