@@ -16,9 +16,9 @@
 
 <script type="text/javascript">
     function initMap(loc) {
-        if (!loc) fakeLoc = {coords: {longitude: -79.3985955, latitude: 43.6685239}};
+        if (!loc) loc = {coords: {longitude: -79.3985955, latitude: 43.6685239}};
 
-        veos.map.createMap(loc || fakeLoc, "#reports-map");
+        veos.map.createMap(loc.coords.latitude, loc.coords.longitude, "#reports-map");
     }
 
     $(window).load(function () {
