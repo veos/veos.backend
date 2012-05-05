@@ -13,5 +13,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.sass-cache/*
 
 /public/photos/*
+
+/vendor/bundle/*
