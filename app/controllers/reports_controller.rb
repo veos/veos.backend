@@ -6,23 +6,31 @@ class ReportsController < ApplicationController
 
   def index
     @reports = Report.find(:all)
-    respond_with(@reports,  :include => [:camera, :sign])
+    respond_with_report(@reports)
   end
 
   def show
     @report = Report.find(params[:id])
-    respond_with(@report, :include => [:camera, :sign])
+    respond_with_report(@report)
   end
 
   def create
     @report = Report.create(params[:report])
-    respond_with(@report, :include => [:camera, :sign])
+    respond_with_report(@report)
   end
 
   def update
     @report = Report.find(params[:id])
     @report.update_attributes(params[:report])
-    respond_with(@report, :include => [:camera, :sign])
+    respond_with_report(@report)
+  end
+
+  protected
+  def respond_with_report(report)
+    respond_with(report, :include => {
+      :camera => {:include => {:photos => {:methods => [:url]}}}, 
+      :sign => {:include => {:photos => {:methods => [:url]}}}
+    })
   end
 
 end
