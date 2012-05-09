@@ -9,5 +9,6 @@ class Report < ActiveRecord::Base
   accepts_nested_attributes_for :camera
   accepts_nested_attributes_for :sign
 
-  validates_presence_of :loc_lat_from_gps, :loc_lng_from_gps
+  validates_presence_of :loc_lat_from_gps, :loc_lng_from_gps, 
+    :if => Proc.new {|r| r.loc_lat_from_user.blank? && r.loc_lng_from_user.blank?}
 end
