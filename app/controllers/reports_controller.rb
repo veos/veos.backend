@@ -28,8 +28,8 @@ class ReportsController < ApplicationController
   protected
   def respond_with_report(report)
     respond_with(report, :include => {
-      :camera => {:include => {:photos => {:methods => [:url]}}}, 
-      :sign => {:include => {:photos => {:methods => [:url]}}}
+      :camera => {:include => {:photos => {:methods => [:url, :big_url, :thumb_url]}}}, 
+      :sign => {:include => {:photos => {:methods => [:url, :big_url, :thumb_url]}}}
     })
   end
 

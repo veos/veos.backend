@@ -1,0 +1,1 @@
+Paperclip.registered_attachments_styles_path = File.join(Rails.root, "/public/photos/paperclip_attachments.yml")
