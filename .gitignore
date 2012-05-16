@@ -20,3 +20,4 @@
 /vendor/bundle/*
 
 .DS_Store
+public/.DS_Store
