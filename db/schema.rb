@@ -11,28 +11,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417145314) do
+ActiveRecord::Schema.define(:version => 20120715012837) do
 
-  create_table "camera_spaces", :force => true do |t|
-    t.integer  "camera_id",  :null => false
-    t.string   "space",      :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "installations", :force => true do |t|
+    t.integer "compliance_level"
+    t.integer "compliance_level_override"
+    t.text    "compliance_note"
+    t.integer "organization_id"
+    t.string  "jurisdiction"
   end
 
-  add_index "camera_spaces", ["camera_id"], :name => "camera_spaces_camera_id_fk"
+  add_index "installations", ["organization_id"], :name => "index_installations_on_organization_id"
 
-  create_table "cameras", :force => true do |t|
-    t.integer  "report_id",  :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "organizations", :force => true do |t|
+    t.string "name"
+    t.string "org_type"
+    t.string "privacy_officer_name"
+    t.string "privacy_officer_email"
+    t.string "privacy_officer_telephone"
+    t.text   "privacy_officer_note"
   end
 
-  add_index "cameras", ["report_id"], :name => "cameras_report_id_fk"
+  create_table "photo_tags", :force => true do |t|
+    t.integer "photo_id"
+    t.string  "tag"
+  end
+
+  add_index "photo_tags", ["photo_id"], :name => "index_photo_tags_on_photo_id"
 
   create_table "photos", :force => true do |t|
-    t.integer  "of_object_id"
-    t.string   "of_object_type"
+    t.integer  "report_id"
+    t.text     "notes"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -41,55 +50,50 @@ ActiveRecord::Schema.define(:version => 20120417145314) do
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "photos", ["report_id"], :name => "index_photos_on_report_id"
+
   create_table "reports", :force => true do |t|
+    t.integer  "installation_id"
     t.float    "loc_lat_from_gps"
     t.float    "loc_lng_from_gps"
     t.string   "loc_description_from_google"
     t.float    "loc_lat_from_user"
     t.float    "loc_lng_from_user"
     t.string   "loc_description_from_user"
+    t.boolean  "owner_identifiable"
     t.string   "owner_name"
-    t.string   "owner_description"
+    t.string   "owner_type"
+    t.string   "operator_name"
+    t.integer  "camera_count"
+    t.boolean  "has_sign"
+    t.text     "sign_text"
+    t.string   "sign_visibility"
+    t.text     "notes"
+    t.string   "contributor_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
 
-  create_table "sign_stated_properties", :force => true do |t|
-    t.integer  "sign_id",    :null => false
-    t.string   "property",   :null => false
+  add_index "reports", ["installation_id"], :name => "index_reports_on_installation_id"
+
+  create_table "sign_tags", :force => true do |t|
+    t.integer  "report_id"
+    t.string   "tag"
+    t.string   "tag_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "sign_stated_properties", ["sign_id"], :name => "sign_stated_properties_sign_id_fk"
+  add_index "sign_tags", ["report_id"], :name => "index_sign_tags_on_report_id"
 
-  create_table "sign_stated_purposes", :force => true do |t|
-    t.integer  "sign_id",    :null => false
-    t.string   "purpose",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_foreign_key "installations", "organizations", :name => "installations_organization_id_fk", :dependent => :nullify
 
-  add_index "sign_stated_purposes", ["sign_id"], :name => "sign_stated_purposes_sign_id_fk"
+  add_foreign_key "photo_tags", "photos", :name => "photo_tags_photo_id_fk", :dependent => :delete
 
-  create_table "signs", :force => true do |t|
-    t.integer  "report_id",  :null => false
-    t.text     "text"
-    t.string   "visibility"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_foreign_key "photos", "reports", :name => "photos_report_id_fk", :dependent => :nullify
 
-  add_index "signs", ["report_id"], :name => "signs_report_id_fk"
+  add_foreign_key "reports", "installations", :name => "reports_installation_id_fk", :dependent => :nullify
 
-  add_foreign_key "camera_spaces", "cameras", :name => "camera_spaces_camera_id_fk", :dependent => :delete
-
-  add_foreign_key "cameras", "reports", :name => "cameras_report_id_fk", :dependent => :delete
-
-  add_foreign_key "sign_stated_properties", "signs", :name => "sign_stated_properties_sign_id_fk", :dependent => :delete
-
-  add_foreign_key "sign_stated_purposes", "signs", :name => "sign_stated_purposes_sign_id_fk", :dependent => :delete
-
-  add_foreign_key "signs", "reports", :name => "signs_report_id_fk", :dependent => :delete
+  add_foreign_key "sign_tags", "reports", :name => "sign_tags_report_id_fk", :dependent => :delete
 
 end

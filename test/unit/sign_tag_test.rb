@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SignsControllerTest < ActionController::TestCase
+class SignTagTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

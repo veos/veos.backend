@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SignStatedPurposeTest < ActiveSupport::TestCase
+class PhotoTagTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

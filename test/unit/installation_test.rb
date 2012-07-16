@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CameraSpaceTest < ActiveSupport::TestCase
+class InstallationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

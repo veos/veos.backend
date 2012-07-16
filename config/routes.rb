@@ -1,9 +1,9 @@
 VeosBackend::Application.routes.draw do
+  resources :organizations
+
+  resources :installations
+
   resources :photos
-
-  resources :signs
-
-  resources :cameras
 
   resources :reports
 
