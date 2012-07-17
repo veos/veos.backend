@@ -4,6 +4,8 @@ class Photo < ActiveRecord::Base
   belongs_to :report
   has_many :tags, :class_name => PhotoTag.name
 
+  accepts_nested_attributes_for :tags
+
   has_attached_file :image, 
     :path => ":rails_root/public/photos/:attachment/:id/:style/:filename.jpg",
     :url => "/photos/:attachment/:id/:style/:filename.jpg",
