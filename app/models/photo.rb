@@ -1,5 +1,7 @@
 class Photo < ActiveRecord::Base
-  attr_protected :id
+  attr_protected :id, 
+    :url, :big_url, :thumb_url, 
+    :created_at, :updated_at
 
   belongs_to :report
   has_many :tags, :class_name => PhotoTag.name

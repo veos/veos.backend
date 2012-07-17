@@ -50,6 +50,9 @@ module VeosBackend
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
 
+    # Don't raise exception on mass assignment protection for Active Record models
+    config.active_record.mass_assignment_sanitizer = :logger
+
     # For backbone.js
     config.active_record.include_root_in_json = false
 
