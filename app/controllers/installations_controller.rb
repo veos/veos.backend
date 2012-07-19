@@ -6,12 +6,18 @@ class InstallationsController < ApplicationController
 
   def index
     @inst = Installation.all
-    respond_with(@inst, :methods => :latest_report)
+    respond_with(@inst, :methods => 
+        [:latest_report, :loc_lat, :loc_lng, :loc_description, 
+          :owner_name, :owner_aliases, :owner_type]
+      )
   end
 
   def show
     @inst = Installation.find(params[:id])
-    respond_with(@inst, :methods => :latest_report)
+    respond_with(@inst, :methods => 
+        [:latest_report, :loc_lat, :loc_lng, :loc_description, 
+          :owner_name, :owner_aliases, :owner_type]
+      )
   end
 
 end

@@ -9,19 +9,19 @@ class Installation < ActiveRecord::Base
     :order => 'created_at'
 
   def loc_lat
-    latest_report.loc_lat_from_user || latest_report.loc_lat_from_gps
+    latest_report && (latest_report.loc_lat_from_user || latest_report.loc_lat_from_gps)
   end
 
   def loc_lng
-    latest_report.loc_lng_from_user || latest_report.lng_lat_from_gps
+    latest_report && (latest_report.loc_lng_from_user || latest_report.loc_lng_from_gps)
   end
 
   def loc_description
-    latest_report.loc_description_from_user || latest_report.loc_description_from_google
+    latest_report && (latest_report.loc_description_from_user || latest_report.loc_description_from_google)
   end
 
   def owner_name
-    latest_report.owner_name
+    latest_report && latest_report.owner_name
   end
 
   def owner_aliases
@@ -29,7 +29,7 @@ class Installation < ActiveRecord::Base
   end
 
   def owner_type
-    latest_report.owner_type
+    latest_report && latest_report.owner_type
   end
 
 
