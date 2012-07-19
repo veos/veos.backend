@@ -1,5 +1,6 @@
 class Report < ActiveRecord::Base
-  attr_protected :id
+  attr_protected :id, 
+    :installation_attributes # hacky way to ignore installation stuff, since we don't want this updated via nested attributes
 
   belongs_to :installation
   has_many :photos

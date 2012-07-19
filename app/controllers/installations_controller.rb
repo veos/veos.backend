@@ -6,12 +6,12 @@ class InstallationsController < ApplicationController
 
   def index
     @inst = Installation.all
-    respond_with(@inst)
+    respond_with(@inst, :methods => :latest_report)
   end
 
   def show
     @inst = Installation.find(params[:id])
-    respond_with(@inst)
+    respond_with(@inst, :methods => :latest_report)
   end
 
 end
