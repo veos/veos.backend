@@ -15,7 +15,11 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = Report.create(params[:report])
+    Report.transaction do
+      @report = Report.create(params[:report])
+      @report.create_installation unless @report.installation
+    end
+
     respond_with_report(@report)
   end
 
