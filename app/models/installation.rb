@@ -22,9 +22,6 @@ class Installation < ActiveRecord::Base
 
   include GeoMixin
 
-  # set to calculate distance
-  class_attribute :to_lat, :to_lng
-
   def loc_lat
     latest_report && (latest_report.loc_lat_from_user || latest_report.loc_lat_from_gps)
   end
@@ -47,10 +44,6 @@ class Installation < ActiveRecord::Base
 
   def owner_type
     latest_report && latest_report.owner_type
-  end
-
-  def distance
-    distance_to(to_lat, to_lng)
   end
 
   # A SQL SELECT statement for the haversine function (tested only with MySQL) to calculate the distance between

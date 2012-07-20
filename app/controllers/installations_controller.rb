@@ -10,9 +10,7 @@ class InstallationsController < ApplicationController
   end
 
   def near
-    Installation.to_lat = params[:lat].to_f
-    Installation.to_lng = params[:lng].to_f
-    @inst = Installation.near(params[:lat],params[:lng],params[:max_dist])
+    @inst = Installation.near(params[:lat].to_f, params[:lng].to_f, params[:max_dist].to_f)
     respond_with_installation(@inst)
   end
 
