@@ -1,7 +1,9 @@
 VeosBackend::Application.routes.draw do
   resources :organizations
 
-  resources :installations
+  resources :installations do
+    get 'near', :on => :collection
+  end
 
   resources :photos
 
