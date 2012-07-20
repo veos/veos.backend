@@ -4,10 +4,10 @@ class Report < ActiveRecord::Base
 
   belongs_to :installation
   has_many :photos
-  has_many :sign_tags
+  has_many :tags, :class_name => ReportTag.name
 
   accepts_nested_attributes_for :photos
-  accepts_nested_attributes_for :sign_tags
+  accepts_nested_attributes_for :tags
 
   validates :loc_lat_from_gps, :loc_lng_from_gps, :presence => true,
     :if => Proc.new {|r| r.loc_lat_from_user.blank? && r.loc_lng_from_user.blank?}

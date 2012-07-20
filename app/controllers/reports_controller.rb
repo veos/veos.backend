@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
   def respond_with_report(report)
     respond_with(report, :include => {
       :installation => {:include => :organization},
-      :sign_tags => {}, 
+      :tags => {}, 
       :photos => {:include => :tags, :methods => [:url, :big_url, :thumb_url]}
     })
   end

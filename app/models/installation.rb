@@ -5,7 +5,7 @@ class Installation < ActiveRecord::Base
   belongs_to :organization
 
   has_one :latest_report, 
-    :class_name => "Report",
+    :class_name => Report.name,
     :order => 'created_at DESC'
 
   scope :near, lambda {|lat, lng, max_dist|

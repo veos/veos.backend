@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715012837) do
+ActiveRecord::Schema.define(:version => 20120720001023) do
 
   create_table "installations", :force => true do |t|
     t.integer "compliance_level"
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(:version => 20120715012837) do
 
   add_index "photos", ["report_id"], :name => "index_photos_on_report_id"
 
+  create_table "report_tags", :force => true do |t|
+    t.integer  "report_id"
+    t.string   "tag"
+    t.string   "tag_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "report_tags", ["report_id"], :name => "index_sign_tags_on_report_id"
+
   create_table "reports", :force => true do |t|
     t.integer  "installation_id"
     t.float    "loc_lat_from_gps"
@@ -76,24 +86,14 @@ ActiveRecord::Schema.define(:version => 20120715012837) do
 
   add_index "reports", ["installation_id"], :name => "index_reports_on_installation_id"
 
-  create_table "sign_tags", :force => true do |t|
-    t.integer  "report_id"
-    t.string   "tag"
-    t.string   "tag_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "sign_tags", ["report_id"], :name => "index_sign_tags_on_report_id"
-
   add_foreign_key "installations", "organizations", :name => "installations_organization_id_fk", :dependent => :nullify
 
   add_foreign_key "photo_tags", "photos", :name => "photo_tags_photo_id_fk", :dependent => :delete
 
   add_foreign_key "photos", "reports", :name => "photos_report_id_fk", :dependent => :nullify
 
-  add_foreign_key "reports", "installations", :name => "reports_installation_id_fk", :dependent => :nullify
+  add_foreign_key "report_tags", "reports", :name => "sign_tags_report_id_fk", :dependent => :delete
 
-  add_foreign_key "sign_tags", "reports", :name => "sign_tags_report_id_fk", :dependent => :delete
+  add_foreign_key "reports", "installations", :name => "reports_installation_id_fk", :dependent => :nullify
 
 end
