@@ -3,6 +3,7 @@ VeosBackend::Application.routes.draw do
 
   resources :installations do
     get 'near', :on => :collection
+    get 'amend', :controller => 'reports'
   end
 
   resources :photos

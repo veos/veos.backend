@@ -14,10 +14,24 @@ class ReportsController < ApplicationController
     respond_with_report(@report)
   end
 
+  def amend
+    @inst = Installation.find(params[:installation_id])
+    @old_report = @inst.latest_report
+    @new_report = @old_report.dup
+
+    @old_report.photos.each {|p| p2 = p.dup; p2[:report_id] = nil; @new_report.photos << p2}
+    @old_report.tags.each {|t| t2 = t.dup; t2[:report_id] = nil; @new_report.tags << t2}
+
+    respond_with_report(@new_report)
+  end
+
   def create
     Report.transaction do
       @report = Report.create(params[:report])
-      @report.create_installation unless @report.installation
+      unless @report.installation
+        @report.create_installation
+        @report.save!
+      end
     end
 
     respond_with_report(@report)
