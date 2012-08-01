@@ -22,7 +22,7 @@ class InstallationsController < ApplicationController
   protected
   def respond_with_installation(inst)
     meths = [:latest_report, :loc_lat, :loc_lng, :loc_description, 
-      :owner_name, :owner_aliases, :owner_type]
+      :owner_name, :owner_aliases, :owner_type, :photos]
 
     respond_with(inst, :methods => meths)
   end

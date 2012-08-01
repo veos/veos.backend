@@ -46,6 +46,10 @@ class Installation < ActiveRecord::Base
     latest_report && latest_report.owner_type
   end
 
+  def photos
+    latest_report && latest_report.photos
+  end
+
   # A SQL SELECT statement for the haversine function (tested only with MySQL) to calculate the distance between
   # geo point a and geo point b.
   # Based on code from http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe 
