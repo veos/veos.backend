@@ -1,6 +1,7 @@
 class Report < ActiveRecord::Base
   attr_protected :id, 
-    :installation_attributes # hacky way to ignore installation stuff, since we don't want this updated via nested attributes
+    :installation_attributes, # hacky way to ignore installation stuff, since we don't want this updated via nested attributes
+    :surveilled_space # client is sending this for some reason... probably client-side bug, but patching it here for now
 
   belongs_to :installation
   has_many :photos

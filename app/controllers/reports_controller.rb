@@ -19,8 +19,16 @@ class ReportsController < ApplicationController
     @old_report = @inst.latest_report
     @new_report = @old_report.dup
 
-    @old_report.photos.each {|p| p2 = p.dup; p2[:report_id] = nil; @new_report.photos << p2}
-    @old_report.tags.each {|t| t2 = t.dup; t2[:report_id] = nil; @new_report.tags << t2}
+    @old_report.photos.each do |p| 
+      p2 = p.dup
+      p2[:report_id] = nil
+      @new_report.photos << p2
+    end
+    @old_report.tags.each do |t| 
+      t2 = t.dup
+      t2[:report_id] = nil
+      @new_report.tags << t2
+    end
 
     respond_with_report(@new_report)
   end

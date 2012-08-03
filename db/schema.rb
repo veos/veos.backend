@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720001023) do
+ActiveRecord::Schema.define(:version => 20120803230340) do
 
   create_table "installations", :force => true do |t|
     t.integer "compliance_level"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120720001023) do
     t.datetime "image_updated_at"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.string   "image_fingerprint"
   end
 
   add_index "photos", ["report_id"], :name => "index_photos_on_report_id"
