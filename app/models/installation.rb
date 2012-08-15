@@ -1,4 +1,9 @@
 class Installation < ActiveRecord::Base
+
+  COMPLIANCE_RED   = 1
+  COMPLIANCE_AMBER = 2
+  COMPLIANCE_GREEN = 3
+
   attr_protected :id
 
   has_many :reports
@@ -48,6 +53,26 @@ class Installation < ActiveRecord::Base
 
   def photos
     latest_report && latest_report.photos
+  end
+
+  def tags
+    latest_report && latest_report.tags
+  end
+
+  def compliance_level
+    if compliance_level_override
+      return compliance_level_override
+    end
+
+    if !latest_report
+      return nil
+    end
+
+    if latest_report.has_sign?
+      return COMPLIANCE_AMBER
+    else
+      return COMPLIANCE_RED
+    end
   end
 
   # A SQL SELECT statement for the haversine function (tested only with MySQL) to calculate the distance between
