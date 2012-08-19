@@ -6,7 +6,7 @@ class Photo < ActiveRecord::Base
   belongs_to :report
   has_many :tags, :class_name => PhotoTag.name
 
-  accepts_nested_attributes_for :tags
+  accepts_nested_attributes_for :tags, :allow_destroy => true
 
   has_attached_file :image, 
     :path => ":rails_root/public/photos/:attachment/:fingerprint/:style/:filename.jpg",
