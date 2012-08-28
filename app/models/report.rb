@@ -13,6 +13,8 @@ class Report < ActiveRecord::Base
   validates :loc_lat_from_gps, :loc_lng_from_gps, :presence => true,
     :if => Proc.new {|r| r.loc_lat_from_user.blank? && r.loc_lng_from_user.blank?}
 
+  validates :owner_identifiable, :presence => true
+
   validates :owner_name, :presence => true,
     :if => Proc.new {|r| r.owner_identifiable }
 
