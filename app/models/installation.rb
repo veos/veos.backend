@@ -44,7 +44,7 @@ class Installation < ActiveRecord::Base
   end
 
   def owner_aliases
-    reports.collect{|r| r.owner_name}.uniq
+    reports.collect{|r| r.owner_name}.uniq.compact
   end
 
   def owner_type

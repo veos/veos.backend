@@ -5,7 +5,14 @@ class InstallationsController < ApplicationController
   respond_to :json
 
   def index
-    @inst = Installation.all
+    if params[:owner_name]
+      @inst = Installation.find(:all, 
+        :conditions => ["reports.owner_name = ?", params[:owner_name]],
+        :include => :reports
+      )
+    else
+      @inst = Installation.all
+    end
     respond_with_installation(@inst)
   end
 
