@@ -30,6 +30,12 @@ class InstallationsController < ApplicationController
     respond_with_installation(@inst)
   end
 
+  def autocomplete_owner_name
+    @reports = Report.find(:all,
+        :conditions => ["reports.owner_name LIKE ?", params[:autocomplete]+'%'])
+    respond_with(@reports.collect {|r| r.owner_name}.uniq)
+  end
+
   protected
   def respond_with_installation(inst)
     meths = [:latest_report, :loc_lat, :loc_lng, :loc_description, 
