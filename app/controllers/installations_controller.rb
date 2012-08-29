@@ -8,16 +8,20 @@ class InstallationsController < ApplicationController
     if params[:owner_name]
       @inst = Installation.find(:all, 
         :conditions => ["reports.owner_name = ?", params[:owner_name]],
-        :include => :reports
+        :include => :reports,
+        :order => 'reports.owner_name'
       )
     else
-      @inst = Installation.all
+      @inst = Installation.find(:all,
+        :include => :latest_report,
+        :order => 'reports.owner_name')
     end
     respond_with_installation(@inst)
   end
 
   def near
     @inst = Installation.near(params[:lat].to_f, params[:lng].to_f, params[:max_dist].to_f)
+    @inst.sort_by!(&:distance)
     respond_with_installation(@inst)
   end
 
