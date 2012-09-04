@@ -13,10 +13,27 @@ class Report < ActiveRecord::Base
   validates :loc_lat_from_gps, :loc_lng_from_gps, :presence => true,
     :if => Proc.new {|r| r.loc_lat_from_user.blank? && r.loc_lng_from_user.blank?}
 
-  validates :owner_identifiable, :presence => true
+  validates :owner_identifiable, 
+    :acceptance => { 
+      :accept => true, 
+      :message => "must be checked if you cannot determine the installation's owner" 
+    },
+    :if => Proc.new {|r| r.owner_name.blank? }
 
-  validates :owner_name, :presence => true,
+
+  validates :owner_name, :presence => {
+      :message => "must be entered; if you cannot determine the installation's owner check the 'Cannot identify owner' checkbox" 
+    },
     :if => Proc.new {|r| r.owner_identifiable }
+
+  validates :owner_type, :presence => {
+      :message => "must be selected"
+    }
+
+  validates :has_sign, :inclusion => {
+      :in => [true, false],
+      :message => "must be either 'Yes' or 'No'"
+    }
 
   include GeoMixin
 

@@ -36,9 +36,9 @@ class ReportsController < ApplicationController
   def create
     Report.transaction do
       @report = Report.create(params[:report])
-      unless @report.installation
+      if !@report.installation && @report.valid?
         @report.create_installation
-        @report.save!
+        @report.save
       end
     end
 
