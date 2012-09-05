@@ -8,14 +8,13 @@ class InstallationsController < ApplicationController
     if params[:owner_name]
       @inst = Installation.find(:all, 
         :conditions => ["reports.owner_name = ?", params[:owner_name]],
-        :include => :reports,
-        :order => 'reports.owner_name'
+        :include => :reports
       )
     else
       @inst = Installation.find(:all,
-        :include => :latest_report,
-        :order => 'reports.owner_name')
+        :include => :latest_report)
     end
+    @inst.sort_by{|inst| inst.owner_name || ""}
     respond_with_installation(@inst)
   end
 
