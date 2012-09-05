@@ -15,7 +15,7 @@ class Report < ActiveRecord::Base
 
   validates :owner_identifiable, 
     :acceptance => { 
-      :accept => true, 
+      :accept => false, 
       :message => "must be checked if you cannot determine the installation's owner" 
     },
     :if => Proc.new {|r| r.owner_name.blank? }
