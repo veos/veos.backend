@@ -28,7 +28,8 @@ class Report < ActiveRecord::Base
 
   validates :owner_type, :presence => {
       :message => "must be selected"
-    }
+    },
+    :if => Proc.new {|r| r.owner_identifiable}
 
   validates :has_sign, :inclusion => {
       :in => [true, false],
