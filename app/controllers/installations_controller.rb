@@ -31,7 +31,7 @@ class InstallationsController < ApplicationController
 
   def autocomplete_owner_name
     @reports = Report.find(:all,
-        :conditions => ["reports.owner_name LIKE ?", params[:autocomplete]+'%'])
+        :conditions => ["reports.owner_name LIKE ?", (params[:term]||"")+'%'])
     respond_with(@reports.collect {|r| r.owner_name}.uniq)
   end
 
