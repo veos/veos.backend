@@ -39,13 +39,13 @@ class ReportsController < ApplicationController
       @report = Report.create(params[:report])
       if !@report.installation && @report.valid?
         @report.create_installation
-
-        if @report.contributor_id.blank?
-          @report.contributor_id = request.env["HTTP_X_FORWARDED_FOR"] || request.remote_ip
-        end
-
         @report.save
       end
+    end
+
+    if @report.contributor_id.blank?
+      @report.update_attribute(:contributor_id,
+        request.env["HTTP_X_FORWARDED_FOR"] || request.remote_ip)
     end
 
     respond_with_report(@report)
