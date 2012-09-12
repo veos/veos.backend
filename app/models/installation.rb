@@ -52,7 +52,13 @@ class Installation < ActiveRecord::Base
   end
 
   def photos
-    latest_report && latest_report.photos
+    latest_report && latest_report.photos.collect do |p| 
+      p.attributes.to_hash.merge(
+        :url => p.url,
+        :thumb_url => p.thumb_url,
+        :big_url => p.big_url
+      )
+    end
   end
 
   def tags
