@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815211158) do
+ActiveRecord::Schema.define(:version => 20120911015857) do
 
   create_table "installations", :force => true do |t|
     t.integer "compliance_level_override"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120815211158) do
     t.string "privacy_officer_email"
     t.string "privacy_officer_telephone"
     t.text   "privacy_officer_note"
+    t.string "privacy_officer_address"
   end
 
   create_table "photo_tags", :force => true do |t|
