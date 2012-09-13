@@ -14,7 +14,7 @@ class InstallationsController < ApplicationController
       @inst = Installation.find(:all,
         :include => :latest_report)
     end
-    @inst.sort_by{|inst| inst.owner_name || ""}
+    @inst.sort_by!{|inst| inst.owner_name || ""}
     respond_with_installation(@inst)
   end
 
