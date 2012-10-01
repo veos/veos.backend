@@ -1,8 +1,9 @@
 class Installation < ActiveRecord::Base
 
-  COMPLIANCE_RED   = 1
-  COMPLIANCE_AMBER = 2
-  COMPLIANCE_GREEN = 3
+  COMPLIANCE_NO_SIGN   = "no_sign"
+  COMPLIANCE_MISSING_INFO = "missing_info"
+  COMPLIANCE_MIN_COMPLIANT = "min_compliant"
+  COMPLIANCE_COMPLIANT = "compliant"
 
   attr_protected :id
 
@@ -75,9 +76,9 @@ class Installation < ActiveRecord::Base
     end
 
     if latest_report.has_sign?
-      return COMPLIANCE_AMBER
+      return COMPLIANCE_MISSING_INFO
     else
-      return COMPLIANCE_RED
+      return COMPLIANCE_NO_SIGN
     end
   end
 

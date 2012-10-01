@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911015857) do
+ActiveRecord::Schema.define(:version => 20121001145807) do
 
   create_table "installations", :force => true do |t|
-    t.integer "compliance_level_override"
+    t.string  "compliance_level_override"
     t.text    "compliance_note"
     t.integer "organization_id"
     t.string  "jurisdiction"
