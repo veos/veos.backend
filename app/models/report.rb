@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class Report < ActiveRecord::Base
   attr_protected :id, 
     :installation_attributes, # hacky way to ignore installation stuff, since we don't want this updated via nested attributes
@@ -46,4 +48,11 @@ class Report < ActiveRecord::Base
     loc_lng_from_user || loc_lng_from_gps
   end
 
+  def contributor_id=(identifier)
+    self[:contributor_id] = Digest::MD5.hexdigest(identifier)
+  end
+
+  def tagged_by=(identifier)
+    self[:tagged_by] = Digest::MD5.hexdigest(identifier)
+  end
 end
