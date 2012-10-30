@@ -16,13 +16,13 @@ class Report < ActiveRecord::Base
   validates :owner_identifiable, 
     :acceptance => { 
       :accept => false, 
-      :message => "must be checked if you cannot determine the installation's owner" 
+      :message => "- if you cannot determine the installation's owner, check the 'Cannot identify owner' checkbox" 
     },
     :if => Proc.new {|r| r.owner_name.blank? }
 
 
   validates :owner_name, :presence => {
-      :message => "must be entered; if you cannot determine the installation's owner check the 'Cannot identify owner' checkbox" 
+      :message => "must be entered; if you cannot determine the installation's owner, check the 'Cannot identify owner' checkbox" 
     },
     :if => Proc.new {|r| r.owner_identifiable }
 
