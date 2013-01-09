@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
   respond_to :html, :only => [:index, :show]
 
   def index
-    @photos = Photo.find(: all, :order => "updated_at DESC")
+    @photos = Photo.find(:all, :order => "updated_at DESC")
     respond_with(@photos, :methods => [:url, :thumb_url, :big_url], :include => :tags)
   end
 
