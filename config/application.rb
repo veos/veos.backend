@@ -25,6 +25,9 @@ module VeosBackend
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 
+    # Enable escaping HTML in JSON.
+    config.active_support.escape_html_entities_in_json = true
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
@@ -62,7 +65,7 @@ module VeosBackend
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.mobile_url = "http://mobile.watch.surveillancerights.ca"
+    config.mobile_url = "http://mobile.dev.surveillancerights.ca"
 
     config.middleware.use Rack::Cors do
       allow do
