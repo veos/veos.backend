@@ -3,15 +3,16 @@ class PhotosController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   respond_to :json
+  respond_to :html, :only => [:index, :show]
 
   def index
-    @photos = Photo.all
+    @photos = Photo.find(: all, :order => "updated_at DESC")
     respond_with(@photos, :methods => [:url, :thumb_url, :big_url], :include => :tags)
   end
 
   def show
     @photo = Photo.find(params[:id])
-    respond_with(@photo, :methods => [:url, :thumb_url, :big_url], :include => :tags)
+    respond_with(@photo, :methods => [:url, :thumb_url, :big_url], :include => :tags, :layout => false)
   end
 
   def create
