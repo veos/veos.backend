@@ -3,7 +3,7 @@ class GeneratePhotoBigThumbnail < ActiveRecord::Migration
     say_with_time("Generting big thumbnails...") do
       Photo.all.each do |p|
         say "#{p.id}: p.image"
-        (p.image.reprocess! if p.image) Errno::ENOENT
+        (p.image.reprocess! if p.image) rescue Errno::ENOENT
       end
     end
   end
