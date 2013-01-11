@@ -9,8 +9,8 @@ class Photo < ActiveRecord::Base
   accepts_nested_attributes_for :tags, :allow_destroy => true
 
   has_attached_file :image, 
-    :path => ":rails_root/public/photos/:attachment/:fingerprint/:style/:filename",
-    :url => "/photos/:attachment/:fingerprint/:style/:filename",
+    :path => ":rails_root/public/photos/:attachment/:fingerprint/:style/:filename.jpg",
+    :url => "/photos/:attachment/:fingerprint/:style/:filename.jpg",
     :styles => { :thumb => "100x100#", :big_thumb => "400x400#", :big => "720x720" },
     :convert_options => {
       :all => "-auto-orient"
