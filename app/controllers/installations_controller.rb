@@ -23,8 +23,8 @@ class InstallationsController < ApplicationController
       elsif b.owner_name.blank?
         -1
       else
-        [a.owner_name, a.latest_report && Time.now - a.latest_report.updated_at] <=> 
-          [b.owner_name, b.latest_report && Time.now - b.latest_report.updated_at]
+        [a.owner_name && a.owner_name.downcase, a.latest_report && Time.now - a.latest_report.updated_at] <=> 
+          [b.owner_name && b.owner_name.downcase, b.latest_report && Time.now - b.latest_report.updated_at]
       end
     end
 
