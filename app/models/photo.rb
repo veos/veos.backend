@@ -11,7 +11,7 @@ class Photo < ActiveRecord::Base
   has_attached_file :image, 
     :path => ":rails_root/public/photos/:attachment/:fingerprint/:style/:filename",
     :url => "/photos/:attachment/:fingerprint/:style/:filename",
-    :styles => { :thumb => "100x100#", :big_thumb => :big => "720x720" },
+    :styles => { :thumb => "100x100#", :big_thumb => "400x400#", :big => "720x720" },
     :convert_options => {
       :all => "-auto-orient"
     }
@@ -22,6 +22,10 @@ class Photo < ActiveRecord::Base
 
   def thumb_url
     image.url(:thumb)
+  end
+
+  def big_thumb_url
+    image.url(:big_thumb)
   end
 
   def big_url

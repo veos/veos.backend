@@ -7,24 +7,24 @@ class PhotosController < ApplicationController
 
   def index
     @photos = Photo.find(:all, :order => "updated_at DESC")
-    respond_with(@photos, :methods => [:url, :thumb_url, :big_url], :include => :tags)
+    respond_with(@photos, :methods => [:url, :thumb_url, :big_thumb_url, :big_url], :include => :tags)
   end
 
   def show
     @photo = Photo.find(params[:id])
-    respond_with(@photo, :methods => [:url, :thumb_url, :big_url], :include => :tags, :layout => false)
+    respond_with(@photo, :methods => [:url, :thumb_url, :big_thumb_url, :big_url], :include => :tags, :layout => false)
   end
 
   def create
     @photo = Photo.create(params[:photo])
     Rails.logger.debug @photo.to_json
-    respond_with(@photo, :methods => [:url, :thumb_url, :big_url], :include => :tags)
+    respond_with(@photo, :methods => [:url, :thumb_url, :big_thumb_url, :big_url], :include => :tags)
   end
 
   def update
     @photo = Photo.find(params[:id])
     @photo.update_attributes(params[:photo])
-    respond_with(@photo, :methods => [:url, :thumb_url, :big_url], :include => :tags)
+    respond_with(@photo, :methods => [:url, :thumb_url, :big_thumb_url, :big_url], :include => :tags)
   end
 
 end
