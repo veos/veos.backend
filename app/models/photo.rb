@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
   attr_protected :id, 
-    :url, :big_url, :thumb_url, 
+    :url, :big_url, :thumb_url, :big_thumb_url,
     :created_at, :updated_at
 
   belongs_to :report
