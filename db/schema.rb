@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030205526) do
+ActiveRecord::Schema.define(:version => 20130111203518) do
 
   create_table "installations", :force => true do |t|
     t.string  "compliance_level_override"
