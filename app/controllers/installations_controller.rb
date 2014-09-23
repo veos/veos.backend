@@ -17,7 +17,7 @@ class InstallationsController < ApplicationController
 
     # sort by owner_name, blank last
     # if names are identical, installations with newer reports go first
-    @inst.sort! do |a,b| 
+    @inst.sort! do |a,b|
       if a.owner_name.blank?
         1
       elsif b.owner_name.blank?

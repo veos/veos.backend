@@ -1,9 +1,9 @@
 class Installation < ActiveRecord::Base
 
-  COMPLIANCE_NO_SIGN   = "no_sign"
-  COMPLIANCE_MISSING_INFO = "missing_info"
-  COMPLIANCE_MIN_COMPLIANT = "min_compliant"
-  COMPLIANCE_COMPLIANT = "compliant"
+  COMPLIANCE_NON = "non_compliant"
+  COMPLIANCE_LOW = "low_compliant"
+  COMPLIANCE_MIN = "min_compliant"
+  COMPLIANCE_YUP = "compliant"
 
   attr_protected :id
 
@@ -75,11 +75,27 @@ class Installation < ActiveRecord::Base
       return nil
     end
 
-    if latest_report.has_sign?
-      return COMPLIANCE_MISSING_INFO
-    else
-      return COMPLIANCE_NO_SIGN
+    return COMPLIANCE_NON unless latest_report.has_sign?
+
+    if latest_report.owner_identifiable? &&
+        latest_report.sign_visibility == 'Readable From Outside Area' &&
+        !stated_purposes.empty? && !stated_purposes.has_stated_purpose?('None') &&
+        (latest_report.has_stated_property?('Images Recorded/Archived') ||
+          latest_report.has_stated_property?('Images Monitored Live') ||
+          latest_report.has_stated_property?('Image Retention Period')) &&
+        latest_report.has_stated_property?('Contact/Privacy Policy Info') &&
+        latest_report.has_stated_property?('Privacy Commissioner Contact Info')
+
+      return COMPLIANCE_YUP
+    elsif latest_report.owner_identifiable? &&
+        latest_report.sign_visibility == 'Readable From Outside Area' &&
+        !stated_purposes.empty? && !stated_purposes.has_stated_purpose?('None') &&
+        latest_report.has_stated_property?('Contact/Privacy Policy Info')
+
+      return COMPLIANCE_MIN
     end
+
+    return COMPLIANCE_LOW
   end
 
   # A SQL SELECT statement for the haversine function (tested only with MySQL) to calculate the distance between

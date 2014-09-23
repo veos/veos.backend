@@ -55,4 +55,20 @@ class Report < ActiveRecord::Base
   def tagged_by=(identifier)
     self[:tagged_by] = Digest::MD5.hexdigest(identifier)
   end
+
+  def stated_purposes
+    tags.all(tag_type: 'sign_stated_purpose').map(&:tag)
+  end
+
+  def stated_properties
+    tags.all(tag_type: 'sign_properties').map(&:tag)
+  end
+
+  def has_stated_purpose?(purpose)
+    stated_purposes.include?(purpose)
+  end
+
+  def has_stated_property?(property)
+    stated_properties.include?(property)
+  end
 end
