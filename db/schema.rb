@@ -11,25 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111203518) do
+ActiveRecord::Schema.define(:version => 20140923001647) do
 
   create_table "installations", :force => true do |t|
-    t.string  "compliance_level_override"
-    t.text    "compliance_note"
-    t.integer "organization_id"
-    t.string  "jurisdiction"
+    t.string   "compliance_level_override"
+    t.text     "compliance_note"
+    t.integer  "organization_id"
+    t.string   "jurisdiction"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "installations", ["organization_id"], :name => "index_installations_on_organization_id"
 
   create_table "organizations", :force => true do |t|
-    t.string "name"
-    t.string "org_type"
-    t.string "privacy_officer_name"
-    t.string "privacy_officer_email"
-    t.string "privacy_officer_telephone"
-    t.text   "privacy_officer_note"
-    t.string "privacy_officer_address"
+    t.string   "name"
+    t.string   "org_type"
+    t.string   "privacy_officer_name"
+    t.string   "privacy_officer_email"
+    t.string   "privacy_officer_telephone"
+    t.text     "privacy_officer_note"
+    t.string   "privacy_officer_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "photo_tags", :force => true do |t|
