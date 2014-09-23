@@ -57,11 +57,11 @@ class Report < ActiveRecord::Base
   end
 
   def stated_purposes
-    tags.all(tag_type: 'sign_stated_purpose').map(&:tag)
+    tags.where(tag_type: 'sign_stated_purpose').map(&:tag)
   end
 
   def stated_properties
-    tags.all(tag_type: 'sign_properties').map(&:tag)
+    tags.where(tag_type: 'sign_properties').map(&:tag)
   end
 
   def has_stated_purpose?(purpose)
