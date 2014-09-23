@@ -31,6 +31,8 @@ gem 'rails-backbone'
 
 gem 'responders'
 
+gem 'kaminari' # for pagination
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

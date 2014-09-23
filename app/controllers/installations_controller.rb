@@ -6,13 +6,14 @@ class InstallationsController < ApplicationController
 
   def index
     if params[:owner_name]
-      @inst = Installation.find(:all, 
-        :conditions => ["reports.owner_name = ?", params[:owner_name]],
-        :include => :reports
-      )
+      @inst = Installation.includes(:latest_report)
+                .where(["reports.owner_name = ?", params[:owner_name]])
+                .page(params[:page] || 1)
+                .per(params[:per_page] || 10)
     else
-      @inst = Installation.find(:all,
-        :include => :latest_report)
+      @inst = Installation.includes(:latest_report)
+                .page(params[:page] || 1)
+                .per(params[:per_page] || 10)
     end
 
     # sort by owner_name, blank last
@@ -32,7 +33,10 @@ class InstallationsController < ApplicationController
   end
 
   def near
-    @inst = Installation.near(params[:lat].to_f, params[:lng].to_f, params[:max_dist].to_f)
+    @inst = Installation
+      .near(params[:lat].to_f, params[:lng].to_f, params[:max_dist].to_f)
+      .page(params[:page] || 1)
+      .per(params[:per_page] || 10)
     @inst.sort_by!(&:distance)
     respond_with_installation(@inst)
   end
