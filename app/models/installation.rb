@@ -80,7 +80,7 @@ class Installation < ActiveRecord::Base
     if latest_report.owner_identifiable? &&
         latest_report.sign_visibility == 'Readable From Outside Area' &&
         !latest_report.stated_purposes.empty? &&
-        !latest_report.stated_purposes.has_stated_purpose?('None') &&
+        !latest_report.has_stated_purpose?('None') &&
         (latest_report.has_stated_property?('Images Recorded/Archived') ||
           latest_report.has_stated_property?('Images Monitored Live') ||
           latest_report.has_stated_property?('Image Retention Period')) &&
@@ -91,7 +91,7 @@ class Installation < ActiveRecord::Base
     elsif latest_report.owner_identifiable? &&
         latest_report.sign_visibility == 'Readable From Outside Area' &&
         !latest_report.stated_purposes.empty? &&
-        !latest_report.stated_purposes.has_stated_purpose?('None') &&
+        !latest_report.has_stated_purpose?('None') &&
         latest_report.has_stated_property?('Contact/Privacy Policy Info')
 
       return COMPLIANCE_MIN
