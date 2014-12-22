@@ -15,15 +15,29 @@ class Installation < ActiveRecord::Base
     :order => 'created_at DESC'
 
   scope :near, lambda {|lat, lng, max_dist|
-    dist = haversine_sql(Installation.sanitize(lat), Installation.sanitize(lng), 'IFNULL(loc_lat_from_user,loc_lat_from_gps)', 'IFNULL(loc_lng_from_user,loc_lng_from_gps)')
-    joins(:latest_report).
-    select("installations.*, #{dist} AS distance").
-    where(
-      "reports.id = (SELECT id FROM reports r2 WHERE r2.installation_id = installations.id ORDER BY created_at DESC LIMIT 1) 
-        AND (#{dist} <= ?)", 
-      max_dist.to_f
-    ).
-    order(dist)
+    if max_dist
+      dist = haversine_sql(Installation.sanitize(lat), Installation.sanitize(lng), 'IFNULL(loc_lat_from_user,loc_lat_from_gps)', 'IFNULL(loc_lng_from_user,loc_lng_from_gps)')
+      select = "installations.*, #{dist} AS distance"
+      where = [
+        "reports.id = (SELECT id FROM reports r2 WHERE r2.installation_id = installations.id ORDER BY created_at DESC LIMIT 1)
+        AND (#{dist} <= ?)",
+        max_dist.to_f
+      ]
+
+      joins(:latest_report).
+      select(select).
+      where(*where).
+      order(dist)
+    else
+      select = "installations.*"
+      where = [
+        "reports.id = (SELECT id FROM reports r2 WHERE r2.installation_id = installations.id ORDER BY created_at DESC LIMIT 1)"
+      ]
+
+      joins(:latest_report).
+      select(select).
+      where(*where)
+    end
   }
 
   include GeoMixin

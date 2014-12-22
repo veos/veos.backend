@@ -34,10 +34,10 @@ class InstallationsController < ApplicationController
 
   def near
     @inst = Installation
-      .near(params[:lat].to_f, params[:lng].to_f, params[:max_dist].to_f)
+      .near(params[:lat].to_f, params[:lng].to_f, params[:max_dist].nil? ? nil : params[:max_dist].to_f)
       .page(params[:page] || 1)
       .per(params[:per_page] || 10)
-    @inst.sort_by!(&:distance)
+    @inst.sort_by!(&:distance) if params[:max_dist]
     respond_with_installation(@inst)
   end
 
