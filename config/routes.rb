@@ -5,6 +5,7 @@ VeosBackend::Application.routes.draw do
     get 'near', :on => :collection
     get 'amend', :controller => 'reports'
     get 'autocomplete_owner_name', :on => :collection
+    get 'summary', :on => :collection
   end
 
   resources :photos

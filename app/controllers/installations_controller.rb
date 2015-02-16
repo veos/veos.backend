@@ -41,6 +41,14 @@ class InstallationsController < ApplicationController
     respond_with_installation(@inst)
   end
 
+
+  def summary
+    sum = {
+      total_installation_count: Installation.all.count
+    }
+    respond_with(sum)
+  end
+
   def show
     @inst = Installation.find(params[:id])
     respond_with_installation(@inst)
