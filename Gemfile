@@ -8,7 +8,7 @@ gem 'rails', '3.2.10'
 gem 'mysql2'
 gem 'foreigner' # for dealing with foreign keys in the database
 
-gem "paperclip", "~> 3.0" # for handling photos and other file uploads
+gem "paperclip", "~> 4.3" # for handling photos and other file uploads
 
 gem 'json'
 
